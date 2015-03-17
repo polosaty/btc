@@ -42,11 +42,10 @@ def main():
             break
         time.sleep(1)
 
-
     if not sys.stdout.isatty():
         d = list_to_dict(client.list_torrents(), 'hash')
         d = dict((h, d[h]) for h in hashes if h in d)
-        print(encoder.encode(dict_to_list(l)))
+        print(encoder.encode(dict_to_list(d, 'hash')))
 
 if __name__ == '__main__':
     main()
