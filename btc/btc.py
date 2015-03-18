@@ -10,6 +10,12 @@ try:
 except ImportError:
     from ordereddict import OrderedDict
 
+try:
+    exit = exit
+except Exception, e:
+    exit = sys.exit
+
+
 def finish():
     try:
         sys.stdout.close()

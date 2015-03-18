@@ -25,6 +25,9 @@ setup(
             'btc = btc.btc:main'
         ],
     },
+    console=['btc.py'],
+    # console=['test.py'],
+    # options={"py2exe":  {}}
     options={"py2exe":  {'bundle_files': 1}}
 )
 
@@ -34,7 +37,26 @@ python -m virtualenv .envW34 --system-site-packages
 .envW34\Scripts\activate
 python setup.py develop
 python setup_exe.py py2exe
-cp .envW34\Scripts\btc-script.py dist\
-cp .envW34\Scripts\btc.exe dist\
+cp btc-script.py dist\
+cp btc.exe dist\
+
+!!NOT WORK
 '''
-#TODO: make this work without copy btc-script.py btc.exe from <env dir>\Scripts\ to dist\
+
+'''
+echo "import btc.btc; btc.btc.main()" > btc.py
+echo %PATH%
+set PATH=%PATH%;C:\Python27\
+python -m virtualenv .envW27 --system-site-packages
+.envW27\Scripts\activate
+python setup.py develop
+python setup_exe.py py2exe
+mv dist\library.zip dist\library_.zip
+unzip dist\library_.zip to dist\library_\
+mv dist\library_ dist\library.zip
+cp .\btc\* dist\library.zip\btc\
+cp python27.dll dist\
+
+WORK!!!
+'''
+#TODO: make this work without automatically
